@@ -74,8 +74,7 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  hewan
-    .update(req.body, {
+  Hewan.update(req.body, {
       where: { id: id },
     })
     .then((num) => {
@@ -95,3 +94,27 @@ exports.update = (req, res) => {
       });
     });
 };
+
+exports.delete = (req, res) => {
+    const id = req.params.id;
+  
+    Hewan.destroy({
+      where: { id: id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Hewan was deleted successfully!"
+          });
+        } else {
+          res.send({
+            message: `Cannot delete hewan with id=${id}. Maybe hewan was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete hewan with id=" + id
+        });
+      });
+  };

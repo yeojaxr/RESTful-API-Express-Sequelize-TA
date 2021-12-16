@@ -6,7 +6,8 @@ module.exports = app => {
     router.get('/', hewan.findAll)
     router.get ('/:id', hewan.findById)
     router.post('/', hewan.create)
-    router.put('/', hewan.update)
+    router.put('/:id', hewan.update)
+    router.delete('/:id', hewan.delete)
     app.use('/hewan', router);
 
 }
